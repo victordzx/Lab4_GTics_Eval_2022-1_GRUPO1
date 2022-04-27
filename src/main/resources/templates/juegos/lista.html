@@ -7,23 +7,14 @@
     <div id="content">
         <main>
             <!-- Contenido -->
-            <div class="page-header text-center">
-                <h1>Lista de Juegos para la Venta</h1>
+            <div class="page-header text-center py-2">
+                <h1>Lista de Juegos para Venta</h1>
             </div>
             <div class="container-fluid">
-
-                <a class="btn btn-primary mt-4 mb-4" th:href="@{'/juegos/nuevo'}"><span class="bi bi-plus-circle"></span> Nuevo Juego</a>
-                <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${(msg != null) && (msg == '0')}">
-                    <i class="bi bi-check-circle-fill"></i>
-                    <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
-                    <strong>Servicio creado con éxito</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${(msg != null) && (msg == '1')}">
-                    <i class="bi bi-check-circle-fill"></i>
-                    <strong>Servicio actualizado con éxito</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                <div class="alert alert-success" th:text="${msg1}" th:if="${msg1 != null}"></div>
+                <div class="alert alert-success" th:text="${msg2}" th:if="${msg2 != null}"></div>
+                <div class="alert alert-danger" th:text="${msg3}" th:if="${msg3 != null}"></div>
+                <a class="btn btn-primary mt-4 mb-4" th:href="@{/juegos/nuevo}"><span class="bi bi-plus-circle"></span> Nuevo Juego</a>
                 <table class="table table-striped">
                     <thead>
                     <tr>

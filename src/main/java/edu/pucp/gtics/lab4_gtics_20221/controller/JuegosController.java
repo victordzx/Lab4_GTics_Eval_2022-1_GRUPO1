@@ -80,22 +80,23 @@ public class JuegosController {
             return "juegos/editarFrm";
         } else {
             if (juegos.getIdjuego() == 0) {
-                attr.addFlashAttribute("msg", 0);
+                attr.addFlashAttribute("msg1", "Juego creado exitosamente");
                 juegosRepository.save(juegos);
                 return "redirect:/juegos/lista";
             } else {
                 juegosRepository.save(juegos);
-                attr.addFlashAttribute("msg", 1);
+                attr.addFlashAttribute("msg2", "Juego actualizado exitosamente");
                 return "redirect:/juegos/lista";
             }
         }
     }
 
     @GetMapping("/borrar")
-    public String borrarJuegos(@RequestParam("idjuego") int idjuego){
+    public String borrarJuegos(@RequestParam("idjuego") int idjuego, RedirectAttributes attr){
         Optional<Juegos> opt = juegosRepository.findById(idjuego);
         if (opt.isPresent()) {
             juegosRepository.deleteById(idjuego);
+            attr.addFlashAttribute("msg3", "Juego borrado exitosamente");
         }
         return "redirect:/juegos/lista";
     }
