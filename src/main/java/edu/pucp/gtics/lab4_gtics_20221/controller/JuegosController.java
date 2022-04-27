@@ -56,7 +56,7 @@ public class JuegosController {
     }
 
     @GetMapping("/editar")
-    public String editarJuegos(@ModelAttribute ("juegos") Juegos juegos, Model model, @RequestParam("idjuego") int idjuego){
+    public String editarJuegos(@ModelAttribute("juegos") Juegos juegos, @RequestParam("idjuego") int idjuego, Model model){
         Optional<Juegos> juegosOptional = juegosRepository.findById(idjuego);
         if(juegosOptional.isPresent()){
             juegos = juegosOptional.get();
@@ -72,30 +72,23 @@ public class JuegosController {
 
     @PostMapping("/guardar")
     public String guardarJuegos(@ModelAttribute("juegos") @Valid Juegos juegos, BindingResult bindingResult,
-                                RedirectAttributes attr, Model model){
-        if (juegos.getIdjuego() == 0) {
-            juegosRepository.save(juegos);
-            attr.addFlashAttribute("msg", 0);
+                                RedirectAttributes attr, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("listadistribuidoras", distribuidorasRepository.findAll());
+            model.addAttribute("listageneros", generosRepository.findAll());
+            model.addAttribute("listaplataformas", plataformasRepository.findAll());
+            return "juegos/editarFrm";
         } else {
-            try {
-                Optional<Juegos> juegosOptional = juegosRepository.findById(juegos.getIdjuego());
-                if (juegosOptional.isPresent()) {
-                    Juegos juegosGuardar = juegosOptional.get();
-                    juegosGuardar.setNombre(juegos.getNombre());
-                    juegosGuardar.setDescripcion(juegos.getDescripcion());
-                    juegosGuardar.setGenero(juegos.getGenero());
-                    juegosGuardar.setPlataforma(juegos.getPlataforma());
-                    juegosGuardar.setDistribuidora(juegos.getDistribuidora());
-                    juegosGuardar.setImage(juegos.getImage());
-                    juegosGuardar.setPrecio(juegos.getPrecio());
-                    juegosRepository.save(juegosGuardar);
-                    attr.addFlashAttribute("msg", 1);
-                }
-            } catch (Exception e) {
-                System.out.println("ID Juego inválido");
+            if (juegos.getIdjuego() == 0) {
+                attr.addFlashAttribute("msg", 0);
+                juegosRepository.save(juegos);
+                return "redirect:/juegos/lista";
+            } else {
+                juegosRepository.save(juegos);
+                attr.addFlashAttribute("msg", 1);
+                return "redirect:/juegos/lista";
             }
         }
-        return "redirect:/juego/lista";
     }
 
     @GetMapping("/borrar")

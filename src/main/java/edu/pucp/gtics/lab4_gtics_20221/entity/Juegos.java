@@ -9,36 +9,36 @@ import javax.validation.constraints.*;
 public class Juegos {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Min(value = 0, message = "Juego no puede estar vacío")
     private int idjuego;
 
-    @NotBlank
     @Size(min = 3, max = 45, message = "Debe contener entre 3 y 45 caracteres")
     private String nombre;
 
-    @NotBlank
     @Size(min = 3, max = 400, message = "Debe contener entre 3 y 400 caracteres")
     private String descripcion;
 
-    @Digits(integer = 2, fraction = 2)
-    @Max(value = 500)
-    @Min(value = 10)
+    @Digits(integer = 3, fraction = 2, message = "Precio inválido")
+    @Max(value = 500, message = "Valor máximo S/. 500")
+    @Min(value = 10, message = "Valor mínimo S/. 10")
     private double precio;
 
     private String image;
 
     @ManyToOne
     @JoinColumn(name = "idplataforma")
-    @NotBlank
+    @NotNull(message = "Plataforma no puede estar vacio")
     private Plataformas plataforma;
 
     @ManyToOne
     @JoinColumn(name = "iddistribuidora")
-    @NotBlank
+    @NotNull(message = "Distribuidora no puede estar vacio")
     private Distribuidoras distribuidora;
 
     @ManyToOne
     @JoinColumn(name = "idgenero")
-    @NotBlank
+    @NotNull(message = "Genero no puede estar vacio")
     private Generos genero;
 
     public int getIdjuego() {

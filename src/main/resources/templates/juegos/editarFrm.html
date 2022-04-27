@@ -11,63 +11,102 @@
                 <h2 th:text="${juegos.idjuego == 0? 'Nuevo Juego' : 'Editar Juego'}"></h2>
             </div>
             <div class="container-fluid">
-                <form method="POST" th:action="@{'/juegos/guardar'}" class="row g-3" >
+                <form method="POST" th:action="@{'/juegos/guardar'}" th:object="${juegos}" class="row g-3">
+                    <input th:field="*{idjuego}" type="hidden"/>
+
+                    <!--- Nombre --->
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input th:field="*{juegos.nombre}" type="text" class="form-control">
-                        <div class="text-danger" th:if="${#fields.hasErrors('juegos.nombre')}" th:errors="*{juegos.nombre}">
-                        </div>
+                        <input th:field="*{nombre}" class="form-control" type="text"
+                               th:classappend="${#fields.hasErrors('nombre')?'is-invalid':''}"/>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}"
+                             th:errors="*{nombre}"></div>
                     </div>
+
+                    <!--- Descripción --->
                     <div class="form-group">
                         <label>Descripción</label>
-                        <input th:field="*{juegos.descripcion}" type="text" class="form-control">
-                        <div class="text-danger" th:if="${#fields.hasErrors('juegos.descripcion')}"
-                             th:errors="*{juegos.descripcion}"></div>
-
+                        <input th:field="*{descripcion}" class="form-control" type="text"
+                               th:classappend="${#fields.hasErrors('descripcion')?'is-invalid':''}"/>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}"
+                             th:errors="*{descripcion}"></div>
                     </div>
-                    <div class="form-group">
+
+                    <!--- Género --->
+                    <div class="form-group" th:if="${juegos.idjuego == 0}">
                         <label>Género</label>
-                        <input name="idjuego" type="text" class="form-control" th:value="${juegos.idjuego}" hidden>
-                        <select class="form-select" th:field="${juegos.genero.nombre}" name="genero">
+                        <select class="form-select" name="genero" th:field="*{genero}">
+                            <option value="0">-- Seleccione --</option>
+                            <option th:each="gnr : ${listageneros}" th:value="${gnr.idgenero}" th:text="${gnr.nombre}"></option>
+                        </select>
+                        <div class="text-danger" th:if="${#fields.hasErrors('genero')}"
+                             th:errors="*{genero}">
+                        </div>
+                    </div> <!--- Nuevo juego --->
+                    <div class="form-group" th:if="${juegos.idjuego != 0}">
+                        <label>Género</label>
+                        <select class="form-select" name="genero" th:field="*{genero}">
                             <option th:each="gnr : ${listageneros}" th:value="${gnr.idgenero}" th:text="${gnr.nombre}" th:selected="${juegos.genero.idgenero == gnr.idgenero}"></option>
                         </select>
-                        <div class="text-danger" th:if="${#fields.hasErrors('juegos.genero.nombre')}"
-                             th:errors="*{juegos.genero.nombre}"></div>
-                    </div>
-                    <div class="form-group">
+                    </div> <!--- Editar juego --->
+
+                    <!--- Plataforma --->
+                    <div class="form-group" th:if="${juegos.idjuego == 0}">
                         <label>Plataforma</label>
-                        <select class="form-select" th:field="${juegos.plataforma.nombre}" name="genero">
+                        <select class="form-select" name="plataforma" th:field="*{plataforma}">
+                            <option value="0">-- Seleccione --</option>
+                            <option th:each="pltfrm : ${listaplataformas}" th:value="${pltfrm.idplataforma}" th:text="${pltfrm.nombre}"></option>
+                        </select>
+                        <div class="text-danger" th:if="${#fields.hasErrors('plataforma')}"
+                             th:errors="*{plataforma}"></div>
+                    </div> <!--- Nuevo juego --->
+                    <div class="form-group" th:if="${juegos.idjuego != 0}">
+                        <label>Plataforma</label>
+                        <select class="form-select" name="plataforma" th:field="*{plataforma}">
+                            <option value="0">-- Seleccione --</option>
                             <option th:each="pltfrm : ${listaplataformas}" th:value="${pltfrm.idplataforma}" th:text="${pltfrm.nombre}" th:selected="${juegos.plataforma.idplataforma == pltfrm.idplataforma}"></option>
                         </select>
-                        <div class="text-danger" th:if="${#fields.hasErrors('juegos.plataforma.nombre')}"
-                             th:errors="*{juegos.plataforma.nombre}"></div>
-                    </div>
-                    <div class="form-group">
+                    </div> <!--- Editar juego --->
+
+                    <!--- Distribuidora --->
+                    <div class="form-group" th:if="${juegos.idjuego == 0}">
                         <label>Distribuidora</label>
-                        <input th:field="*{juegos.distribuidora.nombre}" type="text" class="form-control" name="nombre" id="distribuidora">
-                        <div class="text-danger" th:if="${#fields.hasErrors('juegos.distribuidora.nombre')}"
-                             th:errors="*{juegos.distribuidora.nombre}"></div>
-                    </div>
+                        <select class="form-select" name="distribuidora" th:field="*{distribuidora}">
+                            <option value="0">-- Seleccione --</option>
+                            <option th:each="dstrb : ${listadistribuidoras}" th:value="${dstrb.iddistribuidora}" th:text="${dstrb.nombre}"></option>
+                        </select>
+                        <div class="text-danger" th:if="${#fields.hasErrors('distribuidora')}"
+                             th:errors="*{distribuidora}"></div>
+                    </div> <!--- Nuevo juego --->
+                    <div class="form-group" th:if="${juegos.idjuego != 0}">
+                        <label>Distribuidora</label>
+                        <select class="form-select" name="distribuidora" th:field="*{distribuidora}">
+                            <option th:each="dstrb : ${listadistribuidoras}" th:value="${dstrb.iddistribuidora}" th:text="${dstrb.nombre}" th:selected="${juegos.distribuidora.iddistribuidora == dstrb.iddistribuidora}"></option>
+                        </select>
+                    </div> <!--- Editar juego --->
+
+                    <!--- Imagen --->
                     <div class="form-group">
                         <label>Imagen URL</label>
-                        <input th:field="*{juegos.image}" type="url" class="form-control">
-                        <div class="text-danger" th:if="${#fields.hasErrors('juegos.image')}"
-                             th:errors="*{juegos.image}"></div>
-
+                        <input th:field="*{image}" class="form-control" type="text"/>
                     </div>
+
+                    <!--- Precio --->
                     <div class="form-group">
                         <label>Precio</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">S/
-                                    <input th:field="*{juegos.precio}" type="text" class="form-control">
-                                    <div class="text-danger" th:if="${#fields.hasErrors('juegos.precio')}"
-                                         th:errors="*{juegos.precio}"></div></div>
+                                    <input th:field="*{precio}" type="text" class="form-control">
+                                </div>
+                                <div class="text-danger" th:if="${#fields.hasErrors('precio')}"
+                                     th:errors="*{precio}">
+                                </div>
                             </div>
-
                         </div>
                     </div>
 
+                    <!--- Botones --->
                     <div class="form-group">
                         <a th:href="@{/juegos/lista}" class="btn btn-danger">Cancelar</a>
                         <button th:text="Regact" type="submit" class="btn btn-primary"></button>
