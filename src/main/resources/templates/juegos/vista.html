@@ -17,7 +17,7 @@
                         <div class="col mb-4" th:each="juego, info : ${listajuegos}">
                             <div class="card" >
                                 <img class="card-img-top" th:src="${juego.image}" alt="Card image cap">
-                                <span class="position-absolute top-100 end-0 translate-middle badge bg-danger fs-6" th:text="|$  ${juego.precio}|"></span>
+                                <span class="position-absolute top-100 end-0 translate-middle badge bg-danger fs-6" th:text="|S/.  ${juego.precio}|"></span>
                                 <div class="card-body">
                                     <h5 class="card-title" >
                                         <span th:text="${juego.nombre}"></span>

@@ -28,11 +28,10 @@ public class DistribuidorasController {
     PaisesRepository paisesRepository;
 
 
-    @GetMapping(value = {"","/lista"})
+    @GetMapping("lista")
     public String listaDistribuidoras(Model model) {
         model.addAttribute("listaDistribuidoras", distribuidorasRepository.findAllByOrderByNombreAsc());
         model.addAttribute("listaPaises", paisesRepository.findAll());
-
         return "distribuidoras/lista";
     }
 

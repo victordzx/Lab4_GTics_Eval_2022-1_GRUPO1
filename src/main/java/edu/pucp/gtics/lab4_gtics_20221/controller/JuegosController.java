@@ -33,7 +33,7 @@ public class JuegosController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping(value = {"","/lista"})
+    @GetMapping("lista")
     public String listaJuegos (Model model){
         model.addAttribute("listaJuegos", juegosRepository.findAllByOrderByPrecioDesc());
         model.addAttribute("listaPlataforma", plataformasRepository.findAll());
@@ -41,7 +41,7 @@ public class JuegosController {
         return "juegos/lista";
     }
 
-    @GetMapping("/vista")
+    @GetMapping(value = {"","/vista"})
     public String vistaJuegos(Model model){
         model.addAttribute("listajuegos", juegosRepository.findAll());
         return "juegos/vista";
