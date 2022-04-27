@@ -26,21 +26,28 @@ public class DistribuidorasController {
     @Autowired
     PaisesRepository paisesRepository;
 
+
     @GetMapping(value = {"/lista"})
-    public String listaDistribuidoras ( ){
+    public String listaDistribuidoras(Model model) {
+        model.addAttribute("listaDistribuidoras", distribuidorasRepository.findAll());
+        model.addAttribute("listaPaises", paisesRepository.findAll());
 
+        return "distribuidoras/lista";
     }
 
 
-    public String editarDistribuidoras(){
+
+    public void editarDistribuidoras(){
 
     }
 
-    public String nuevaDistribuidora( ){
-
+    public String nuevaDistribuidora(@ModelAttribute("distribuidoras") Distribuidoras distribuidoras, Model model ){
+        model.addAttribute("listaDistribuidoras", distribuidorasRepository.findAll());
+        model.addAttribute("listaPaises", paisesRepository.findAll());
+        return "distribuidoras/form";
     }
 
-    public String guardarDistribuidora( ){
+    public void guardarDistribuidora( ){
 
     }
 
