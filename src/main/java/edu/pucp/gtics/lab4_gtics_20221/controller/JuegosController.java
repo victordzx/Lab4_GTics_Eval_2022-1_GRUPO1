@@ -86,8 +86,8 @@ public class JuegosController {
                     juegosGuardar.setGenero(juegos.getGenero());
                     juegosGuardar.setPlataforma(juegos.getPlataforma());
                     juegosGuardar.setDistribuidora(juegos.getDistribuidora());
-                    juegosGuardar.setImage(juegos.setImage());
-                    juegosGuardar.setPrecio(juegos.setPrecio(););
+                    juegosGuardar.setImage(juegos.getImage());
+                    juegosGuardar.setPrecio(juegos.getPrecio());
                     juegosRepository.save(juegosGuardar);
                     attr.addFlashAttribute("msg", "Juego actualizado exitosamente");
                 }
