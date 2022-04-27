@@ -24,6 +24,8 @@ public class Distribuidoras {
     @JoinColumn(name = "idsede")
 
     private Paises pais;
+    @Id
+    private Long id;
 
     public int getIddistribuidora() {
         return iddistribuidora;
@@ -71,4 +73,6 @@ public class Distribuidoras {
     public void setPais(Paises pais) {
         this.pais = pais;
     }
+
+
 }
