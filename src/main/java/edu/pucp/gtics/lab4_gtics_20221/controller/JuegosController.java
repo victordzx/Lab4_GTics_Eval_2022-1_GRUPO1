@@ -14,7 +14,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-
 @Controller
 @RequestMapping("/juegos")
 public class JuegosController {
@@ -42,23 +41,47 @@ public class JuegosController {
         return "juegos/lista";
     }
 
-    public String vistaJuegos ( ){
+    @GetMapping("/vista")
+    public String vistaJuegos(Model model){
+        model.addAttribute("listajuegos", juegosRepository.findAll());
         return "juegos/vista";
     }
 
-    public String nuevoJuegos( ){
+    @GetMapping("/nuevo")
+    public String nuevoJuegos(@ModelAttribute ("juegos") Juegos juegos, Model model){
+        model.addAttribute("listadistribuidoras", distribuidorasRepository.findAll());
+        model.addAttribute("listageneros", generosRepository.findAll());
+        model.addAttribute("listaplataformas", plataformasRepository.findAll());
         return "juegos/editarFrm";
     }
 
-    public String editarJuegos( ){
-        return "juegos/editarFrm";
+    @GetMapping("/editar")
+    public String editarJuegos(@ModelAttribute ("juegos") Juegos juegos, Model model, @RequestParam("idjuego") int idjuego){
+        Optional<Juegos> juegosOptional = juegosRepository.findById(idjuego);
+        if(juegosOptional.isPresent()){
+            juegos = juegosOptional.get();
+            model.addAttribute("juegos", juegos);
+            model.addAttribute("listadistribuidoras", distribuidorasRepository.findAll());
+            model.addAttribute("listageneros", generosRepository.findAll());
+            model.addAttribute("listaplataformas", plataformasRepository.findAll());
+            return "juegos/editarFrm";
+        }else{
+            return "redirect:/juegos/lista";
+        }
     }
 
-    public String guardarJuegos( ){
-        return "redirect:/juegos";
+    @PostMapping("/guardar")
+    public String guardarJuegos(@ModelAttribute("juegos") @Valid Juegos juego, BindingResult bindingResult,
+                                RedirectAttributes attr, Model model){
+        if (juego.getIdjuego() == null) {
+            attr.addFlashAttribute("msg", "Juego creado exitosamente");
+            juego.set
+        } else {
+            attr.addFlashAttribute("msg", "Juego actualizado exitosamente");
+        }
     }
 
-    @GetMapping("/juegos/borrar")
+    @GetMapping("/borrar")
     public String borrarDistribuidora(@RequestParam("id") int id){
         Optional<Juegos> opt = juegosRepository.findById(id);
         if (opt.isPresent()) {
