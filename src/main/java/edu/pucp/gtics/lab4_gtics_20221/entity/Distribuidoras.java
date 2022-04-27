@@ -1,5 +1,7 @@
 package edu.pucp.gtics.lab4_gtics_20221.entity;
 
+import org.hibernate.validator.constraints.URL;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -20,11 +22,11 @@ public class Distribuidoras {
     private String descripcion;
 
     @Size(min = 3, max = 198, message = "Debe contener entre 3 y 198 caracteres")
-
+    @URL(protocol = "http")
     private String web;
 
-    @Digits(integer = 3, fraction = 2, message = "Número inválido")
-    @Max(value = 2100, message = "Número máximo 2100")
+    @Digits(integer = 4, fraction = 0, message = "Número inválido")
+    @Max(value = 2022, message = "Número máximo 2022")
     @Min(value = 1800, message = "Número mínimo 1800")
     private int fundacion ;
 
