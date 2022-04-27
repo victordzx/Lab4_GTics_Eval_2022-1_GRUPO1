@@ -109,7 +109,7 @@
                     <!--- Botones --->
                     <div class="form-group">
                         <a th:href="@{/juegos/lista}" class="btn btn-danger">Cancelar</a>
-                        <button th:text="Regact" type="submit" class="btn btn-primary"></button>
+                        <button type="submit" class="btn btn-primary" th:text="${juegos.idjuego == 0? 'Registrar' : 'Actualizar'}"></button>
                     </div>
                 </form>
             </div>
