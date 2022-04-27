@@ -36,7 +36,11 @@
 
                                 <tr th:each="distribuidora, info : ${listaDistribuidoras}">
                                     <td th:text="${info.index + 1}"></td>
-                                    <td th:text="${distribuidora.nombre}"></td>
+                                    <td>
+                                        <a th:href="${distribuidora.web}">
+                                            <span th:text="${distribuidora.nombre}"></span>
+                                        </a>
+                                    </td>
                                     <td th:text="${distribuidora.fundacion}"></td>
                                     <td th:text="${distribuidora.pais.nombre}"></td>
                                     <td><a class="btn btn-primary" th:title="Editar"
