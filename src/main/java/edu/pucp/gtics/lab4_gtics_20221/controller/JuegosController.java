@@ -33,7 +33,7 @@ public class JuegosController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/lista")
+    @GetMapping(value = {"","/lista"})
     public String listaJuegos (Model model){
         model.addAttribute("listaJuegos", juegosRepository.findAll());
         model.addAttribute("listaPlataforma", plataformasRepository.findAll());
@@ -75,7 +75,7 @@ public class JuegosController {
                                 RedirectAttributes attr, Model model){
         if (juegos.getIdjuego() == 0) {
             juegosRepository.save(juegos);
-            attr.addFlashAttribute("msg", "Juego creado exitosamente");
+            attr.addFlashAttribute("msg", 0);
         } else {
             try {
                 Optional<Juegos> juegosOptional = juegosRepository.findById(juegos.getIdjuego());
@@ -89,7 +89,7 @@ public class JuegosController {
                     juegosGuardar.setImage(juegos.getImage());
                     juegosGuardar.setPrecio(juegos.getPrecio());
                     juegosRepository.save(juegosGuardar);
-                    attr.addFlashAttribute("msg", "Juego actualizado exitosamente");
+                    attr.addFlashAttribute("msg", 1);
                 }
             } catch (Exception e) {
                 System.out.println("ID Juego inválido");
@@ -99,10 +99,10 @@ public class JuegosController {
     }
 
     @GetMapping("/borrar")
-    public String borrarDistribuidora(@RequestParam("id") int id){
-        Optional<Juegos> opt = juegosRepository.findById(id);
+    public String borrarJuegos(@RequestParam("idjuego") int idjuego){
+        Optional<Juegos> opt = juegosRepository.findById(idjuego);
         if (opt.isPresent()) {
-            juegosRepository.deleteById(id);
+            juegosRepository.deleteById(idjuego);
         }
         return "redirect:/juegos/lista";
     }
