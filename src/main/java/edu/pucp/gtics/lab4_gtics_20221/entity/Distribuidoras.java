@@ -21,7 +21,7 @@ public class Distribuidoras {
 
     private String web;
 
-    private int fundacion = 1870;
+    private int fundacion ;
 
     @ManyToOne
     @JoinColumn(name = "idsede")
@@ -35,6 +35,7 @@ public class Distribuidoras {
     public void setIddistribuidora(int iddistribuidora) {
         this.iddistribuidora = iddistribuidora;
     }
+
 
     public String getNombre() {
         return nombre;

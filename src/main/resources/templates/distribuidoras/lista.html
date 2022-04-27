@@ -21,26 +21,22 @@
 
                         <a class="btn btn-primary mt-4 mb-4" th:href="@{/distribuidoras/nuevo}"><span
                                 class="bi bi-plus-circle"></span> Nueva Distribuidora</a>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span th:text=""></span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
                         <table class="table table-striped">
                             <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Fundación</th>
-                                    <th>Sede</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Fundación</th>
+                                <!--<th>Sede</th> -->
+                                <th></th>
+                                <th></th>
+
                             </thead>
                             <tbody>
+
                                 <tr th:each="distribuidora, info : ${listaDistribuidoras}">
                                     <td th:text="${info.index + 1}"></td>
-                                    <td th:text="${distribuidora.}"></td>
+                                    <td th:text="${distribuidora.nombre}"></td>
+                                    <td th:text="${distribuidora.fundacion}"></td>
 
                                     <td><a class="btn btn-primary" th:title="Editar"
                                            th:href="@{'/distribuidoras/editar?id=' + ${distribuidora.iddistribuidora}}"><span
