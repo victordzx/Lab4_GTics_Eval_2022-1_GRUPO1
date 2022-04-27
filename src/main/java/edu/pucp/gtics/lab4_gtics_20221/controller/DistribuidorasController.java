@@ -1,6 +1,7 @@
 package edu.pucp.gtics.lab4_gtics_20221.controller;
 
 import edu.pucp.gtics.lab4_gtics_20221.entity.Distribuidoras;
+import edu.pucp.gtics.lab4_gtics_20221.entity.Juegos;
 import edu.pucp.gtics.lab4_gtics_20221.entity.Paises;
 import edu.pucp.gtics.lab4_gtics_20221.repository.DistribuidorasRepository;
 import edu.pucp.gtics.lab4_gtics_20221.repository.PaisesRepository;
@@ -36,19 +37,43 @@ public class DistribuidorasController {
     }
 
 
-
-    public void editarDistribuidoras(){
-
+    @GetMapping("/editar")
+    public String editarDistribuidoras(@ModelAttribute("distribuidoras") Distribuidoras distribuidoras , @RequestParam("iddistribuidora") int iddistribuidora, Model model){
+        Optional<Distribuidoras> distribuidorasOptional = distribuidorasRepository.findById(iddistribuidora);
+        if(distribuidorasOptional.isPresent()){
+            distribuidoras = distribuidorasOptional.get();
+            model.addAttribute("distribuidora", distribuidoras);
+            model.addAttribute("listaDistribuidoras", distribuidorasRepository.findAll());
+            model.addAttribute("listaPaises", paisesRepository.findAll());
+            return "distribuidoras/editarFrm";
+        }else{
+            return "redirect:/distribuidoras/lista";
+        }
     }
 
     public String nuevaDistribuidora(@ModelAttribute("distribuidoras") Distribuidoras distribuidoras, Model model ){
         model.addAttribute("listaDistribuidoras", distribuidorasRepository.findAll());
         model.addAttribute("listaPaises", paisesRepository.findAll());
-        return "distribuidoras/form";
+        return "distribuidoras/editarFrm";
     }
 
-    public void guardarDistribuidora( ){
-
+    public String guardarDistribuidora(@ModelAttribute("distribuidoras") @Valid Distribuidoras distribuidoras, BindingResult bindingResult,
+                                       RedirectAttributes attr, Model model ){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("listaDistribuidoras", distribuidorasRepository.findAll());
+            model.addAttribute("listaPaises", paisesRepository.findAll());
+            return "distribuidoras/editarFrm";
+        } else {
+            if (distribuidoras.getIddistribuidora() == 0) {
+                attr.addFlashAttribute("msg1", "Distribuidora creado exitosamente");
+                distribuidorasRepository.save(distribuidoras);
+                return "redirect:/distribuidoras/lista";
+            } else {
+                distribuidorasRepository.save(distribuidoras);
+                attr.addFlashAttribute("msg2", "Distribuidora actualizado exitosamente");
+                return "redirect:/distribuidoras/lista";
+            }
+        }
     }
 
     @GetMapping("/borrar")
