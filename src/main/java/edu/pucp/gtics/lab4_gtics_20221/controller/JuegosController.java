@@ -35,7 +35,7 @@ public class JuegosController {
 
     @GetMapping(value = {"","/lista"})
     public String listaJuegos (Model model){
-        model.addAttribute("listaJuegos", juegosRepository.findAll());
+        model.addAttribute("listaJuegos", juegosRepository.findAllByOrderByPrecioDesc());
         model.addAttribute("listaPlataforma", plataformasRepository.findAll());
         model.addAttribute("listaDistribuidora", distribuidorasRepository.findAll());
         return "juegos/lista";
