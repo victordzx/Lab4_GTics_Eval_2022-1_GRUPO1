@@ -1,0 +1,49 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head(title='Gameshop3 - Bienvenido')"></head>
+<body>
+<div class='container container-app'>
+    <div th:replace="fragments/header.html :: header('Distribuidoras')"></div>
+
+    <div id="content">
+        <main>
+            <!-- Contenido -->
+            <div class="page-header text-center">
+                <h1>Lista de Distribuidoras</h1>
+            </div>
+            <div class="container-fluid">
+
+                <a class="btn btn-primary mt-4 mb-4" th:href="@{/distribuidoras/nuevo}"><span class="bi bi-plus-circle"></span> Nueva Distribuidora</a>
+                <div  class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill"></i>
+                    <span th:text=""></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Fundación</th>
+                        <th>Sede</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+
+                        <td><a class="btn btn-primary" th:title="Editar" th:href="@{'/distribuidoras/editar?id=' + ${distribuidora.iddistribuidora}}"><span class="bi bi-pencil-square"></span></a></td>
+                        <td><a class="btn btn-danger" th:title="Borrar" th:href="@{'/distribuidoras/borrar?id=' + ${distribuidora.iddistribuidora}}"><span class="bi bi-trash"></span></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /Contenido -->
+        </main>
+        <div th:replace="fragments/footer.html :: footer(year='2022')"></div>
+    </div>
+</div>
+<div th:replace="fragments/base.html :: jsScripts"></div>
+</body>
+</html>

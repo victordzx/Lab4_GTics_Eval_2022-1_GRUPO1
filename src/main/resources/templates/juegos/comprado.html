@@ -1,0 +1,38 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head(title='Gameshop3 - Bienvenido')"></head>
+<body>
+<div class='container container-app'>
+    <div th:replace="fragments/header.html :: header(option='Juegos')"></div>
+
+    <div id="content">
+        <main>
+            <!-- Contenido -->
+            <div class="page-header text-center">
+                <h1>Lista de Juegos Comprados</h1>
+            </div>
+            <div class="container-fluid">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 card-app">
+                <div class="col mb-4" th:each="juego, info : ${listajuegos}">
+                    <div class="card" >
+                        <img class="card-img-top" th:src="${juego.imageURL}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title" >
+                                <span th:text="${juego.nombre}"></span>
+                                <span class="badge badge-warning" th:text="${juego.genero}"></span>
+                            </h5>
+                            <p class="card-text" th:text="${juego.descripcion}"></p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- /Contenido -->
+        </main>
+        <div th:replace="fragments/footer.html :: footer(year='2022')"></div>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.container-app {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.card-app {
+    margin-top: 20px;
+}
+
+.card-body-app {
+    margin-bottom: 0px;
+}
+
+.card-center-app {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
+span.badge.bg-warning.text-dark {
+    font-size: small!important;
+}

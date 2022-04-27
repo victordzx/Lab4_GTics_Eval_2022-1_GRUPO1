@@ -1,0 +1,36 @@
+/*  CSS para modificar el tamaño del sidenav
+    Reemplace los valores para cambiar el tamaño del sidenav según sea necesario
+*/
+
+.sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
+    width: 225px;
+}
+
+.sb-nav-fixed #layoutSidenav #layoutSidenav_content {
+    padding-left: 225px;
+}
+
+#layoutSidenav #layoutSidenav_content {
+    margin-left: -225px;
+}
+
+.sb-topnav .navbar-brand {
+    width: 225px;
+}
+
+#layoutSidenav #layoutSidenav_nav {
+    flex-basis: 225px;
+    transform: translateX(-225px);
+}
+
+@media (min-width: 992px) {
+    #layoutSidenav #layoutSidenav_nav {
+        transform: translateX(0);
+    }
+    .sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
+        transform: translateX(-225px);
+    }
+    .sb-sidenav-toggled #layoutSidenav #layoutSidenav_content {
+        margin-left: -225px;
+    }
+}

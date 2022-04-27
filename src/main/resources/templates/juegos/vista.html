@@ -1,0 +1,41 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head(title='Gameshop3 - Bienvenido')"></head>
+<body>
+<div class='container container-app'>
+    <div th:replace="fragments/header.html :: header(option='-')"></div>
+
+    <div id="content">
+        <main>
+            <!-- Contenido -->
+            <div class="container-fluid">
+
+                <div class="page-header text-center">
+                    <h1>Lista de Juegos</h1>
+                </div>
+                <div class="container-fluid">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 card-app">
+                        <div class="col mb-4" th:each="juego, info : ${listajuegos}">
+                            <div class="card" >
+                                <img class="card-img-top" th:src="${juego.image}" alt="Card image cap">
+                                <span class="position-absolute top-100 end-0 translate-middle badge bg-danger fs-6" th:text="|$  ${juego.precio}|"></span>
+                                <div class="card-body">
+                                    <h5 class="card-title" >
+                                        <span th:text="${juego.nombre}"></span>
+                                        <span class="badge bg-warning text-dark fs-6" th:text="${juego.genero.nombre}"></span>
+                                    </h5>
+                                    <p class="card-text" th:text="${juego.descripcion}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /Contenido -->
+        </main>
+        <div th:replace="fragments/footer.html :: footer(year='2022')"></div>
+    </div>
+</div>
+<div th:replace="fragments/base.html :: jsScripts"></div>
+</body>
+</html>

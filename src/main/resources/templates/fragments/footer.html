@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<footer th:fragment="footer(year)" class="py-4 bg-light mt-auto">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">
+                <span th:text="|Colocar  # Grupo - PUCP @  ${year}|"></span>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

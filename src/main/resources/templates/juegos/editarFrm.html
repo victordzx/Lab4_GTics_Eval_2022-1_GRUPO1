@@ -1,0 +1,62 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head(title='Gameshop3 - Bienvenido')"></head>
+<body>
+<div class='container container-app'>
+    <div th:replace="fragments/header.html :: header(option='Juegos')"></div>
+
+    <div id="content">
+        <main>
+            <!-- Contenido -->
+        <div class="page-header text-center">
+            <h2 th:text=""></h2>
+        </div>
+        <div class="container-fluid">
+                <form method="POST" class="row g-3" >
+                    <div class="form-group">
+                        <label>Nombre</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">Género</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">Plataforma</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">Distribuidora</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Imagen URL</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Precio</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">S/</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <a th:href="@{/juegos/lista}" class="btn btn-danger">Cancelar</a>
+                        <button type="submit" class="btn btn-primary" th:text="Boton ---">Reg/act</button>
+                    </div>
+                </form>
+        </div>
+        </main>
+    </div>
+            <!-- /Contenido -->
+    <div th:replace="fragments/footer.html :: footer(year='2022')"></div>
+</div>
+<div th:replace="fragments/base.html :: jsScripts"></div>
+</body>
+</html>
