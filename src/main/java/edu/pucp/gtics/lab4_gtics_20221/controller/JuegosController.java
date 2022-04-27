@@ -14,7 +14,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-
 @Controller
 @RequestMapping("/juegos")
 public class JuegosController {
@@ -34,7 +33,7 @@ public class JuegosController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping(value = {"", "/","/juegos/lista"})
+    @GetMapping(value = {"","/lista"})
     public String listaJuegos (Model model){
         model.addAttribute("listaJuegos", juegosRepository.findAll());
         model.addAttribute("listaPlataforma", plataformasRepository.findAll());
@@ -42,27 +41,68 @@ public class JuegosController {
         return "juegos/lista";
     }
 
-    public String vistaJuegos ( ){
+    @GetMapping("/vista")
+    public String vistaJuegos(Model model){
+        model.addAttribute("listajuegos", juegosRepository.findAll());
         return "juegos/vista";
     }
 
-    public String nuevoJuegos( ){
+    @GetMapping("/nuevo")
+    public String nuevoJuegos(@ModelAttribute ("juegos") Juegos juegos, Model model){
+        model.addAttribute("listadistribuidoras", distribuidorasRepository.findAll());
+        model.addAttribute("listageneros", generosRepository.findAll());
+        model.addAttribute("listaplataformas", plataformasRepository.findAll());
         return "juegos/editarFrm";
     }
 
-    public String editarJuegos( ){
-        return "juegos/editarFrm";
+    @GetMapping("/editar")
+    public String editarJuegos(@ModelAttribute ("juegos") Juegos juegos, Model model, @RequestParam("idjuego") int idjuego){
+        Optional<Juegos> juegosOptional = juegosRepository.findById(idjuego);
+        if(juegosOptional.isPresent()){
+            juegos = juegosOptional.get();
+            model.addAttribute("juegos", juegos);
+            model.addAttribute("listadistribuidoras", distribuidorasRepository.findAll());
+            model.addAttribute("listageneros", generosRepository.findAll());
+            model.addAttribute("listaplataformas", plataformasRepository.findAll());
+            return "juegos/editarFrm";
+        }else{
+            return "redirect:/juegos/lista";
+        }
     }
 
-    public String guardarJuegos( ){
-        return "redirect:/juegos";
+    @PostMapping("/guardar")
+    public String guardarJuegos(@ModelAttribute("juegos") @Valid Juegos juegos, BindingResult bindingResult,
+                                RedirectAttributes attr, Model model){
+        if (juegos.getIdjuego() == 0) {
+            juegosRepository.save(juegos);
+            attr.addFlashAttribute("msg", 0);
+        } else {
+            try {
+                Optional<Juegos> juegosOptional = juegosRepository.findById(juegos.getIdjuego());
+                if (juegosOptional.isPresent()) {
+                    Juegos juegosGuardar = juegosOptional.get();
+                    juegosGuardar.setNombre(juegos.getNombre());
+                    juegosGuardar.setDescripcion(juegos.getDescripcion());
+                    juegosGuardar.setGenero(juegos.getGenero());
+                    juegosGuardar.setPlataforma(juegos.getPlataforma());
+                    juegosGuardar.setDistribuidora(juegos.getDistribuidora());
+                    juegosGuardar.setImage(juegos.getImage());
+                    juegosGuardar.setPrecio(juegos.getPrecio());
+                    juegosRepository.save(juegosGuardar);
+                    attr.addFlashAttribute("msg", 1);
+                }
+            } catch (Exception e) {
+                System.out.println("ID Juego inválido");
+            }
+        }
+        return "redirect:/juego/lista";
     }
 
-    @GetMapping("/juegos/borrar")
-    public String borrarDistribuidora(@RequestParam("id") int id){
-        Optional<Juegos> opt = juegosRepository.findById(id);
+    @GetMapping("/borrar")
+    public String borrarJuegos(@RequestParam("idjuego") int idjuego){
+        Optional<Juegos> opt = juegosRepository.findById(idjuego);
         if (opt.isPresent()) {
-            juegosRepository.deleteById(id);
+            juegosRepository.deleteById(idjuego);
         }
         return "redirect:/juegos/lista";
     }

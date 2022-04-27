@@ -8,7 +8,6 @@
         <main>
             <!-- Contenido -->
         <div class="page-header text-center">
-            <h2 th:text=""></h2>
         </div>
         <div class="container-fluid">
                 <form method="POST" class="row g-3" >
@@ -48,7 +47,8 @@
 
                     <div class="form-group">
                         <a th:href="@{/juegos/lista}" class="btn btn-danger">Cancelar</a>
-                        <button type="submit" class="btn btn-primary" th:text="Boton ---">Reg/act</button>
+                        <!--- <button th:text="" type="submit" class="btn btn-primary"></button> --->
+                        <button th:text="regact" type="submit" class="btn btn-primary"></button>
                     </div>
                 </form>
         </div>

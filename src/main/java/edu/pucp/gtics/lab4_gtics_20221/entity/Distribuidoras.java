@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 @Table(name = "distribuidoras")
 public class Distribuidoras {
 
+    @Id
     private int iddistribuidora;
 
     private String nombre;
@@ -24,8 +25,6 @@ public class Distribuidoras {
     @JoinColumn(name = "idsede")
 
     private Paises pais;
-    @Id
-    private Long id;
 
     public int getIddistribuidora() {
         return iddistribuidora;
