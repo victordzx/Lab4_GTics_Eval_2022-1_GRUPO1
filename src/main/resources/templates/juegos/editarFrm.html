@@ -11,7 +11,7 @@
                 <h2 th:text="${juegos.idjuego == 0? 'Nuevo Juego' : 'Editar Juego'}"></h2>
             </div>
             <div class="container-fluid">
-                <form method="POST" class="row g-3" >
+                <form method="POST" th:action="@{'/juegos/guardar'}" class="row g-3" >
                     <div class="form-group">
                         <label>Nombre</label>
                         <input th:field="*{juegos.nombre}" type="text" class="form-control">
@@ -26,20 +26,24 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="genero">Género</label>
-                        <input th:field="*{juegos.genero.nombre}" type="text" class="form-control" name="nombre" id="genero">
+                        <label>Género</label>
+                        <input name="idjuego" type="text" class="form-control" th:value="${juegos.idjuego}" hidden>
+                        <select class="form-select" th:field="${juegos.genero.nombre}" name="genero">
+                            <option th:each="gnr : ${listageneros}" th:value="${gnr.idgenero}" th:text="${gnr.nombre}" th:selected="${juegos.genero.idgenero == gnr.idgenero}"></option>
+                        </select>
                         <div class="text-danger" th:if="${#fields.hasErrors('juegos.genero.nombre')}"
                              th:errors="*{juegos.genero.nombre}"></div>
-
                     </div>
                     <div class="form-group">
-                        <label for="plataforma">Plataforma</label>
-                        <input th:field="*{juegos.plataforma.nombre}" type="text" class="form-control" name="nombre" id="plataforma">
+                        <label>Plataforma</label>
+                        <select class="form-select" th:field="${juegos.plataforma.nombre}" name="genero">
+                            <option th:each="pltfrm : ${listaplataformas}" th:value="${pltfrm.idplataforma}" th:text="${pltfrm.nombre}" th:selected="${juegos.plataforma.idplataforma == pltfrm.idplataforma}"></option>
+                        </select>
                         <div class="text-danger" th:if="${#fields.hasErrors('juegos.plataforma.nombre')}"
                              th:errors="*{juegos.plataforma.nombre}"></div>
                     </div>
                     <div class="form-group">
-                        <label for="distribuidora">Distribuidora</label>
+                        <label>Distribuidora</label>
                         <input th:field="*{juegos.distribuidora.nombre}" type="text" class="form-control" name="nombre" id="distribuidora">
                         <div class="text-danger" th:if="${#fields.hasErrors('juegos.distribuidora.nombre')}"
                              th:errors="*{juegos.distribuidora.nombre}"></div>
