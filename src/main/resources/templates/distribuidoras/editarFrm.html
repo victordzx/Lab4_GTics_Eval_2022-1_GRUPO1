@@ -60,7 +60,7 @@
 
                     <div class="form-group">
                         <a th:href="@{/distribuidoras/lista}" class="btn btn-danger">Cancelar</a>
-                        <button type="submit" class="btn btn-primary" th:text="Boton ---">Reg/act</button>
+                        <button type="submit" class="btn btn-primary" th:text="${distribuidoras.iddistribuidora == 0? 'Registrar' : 'Actualizar'}"></button>
                     </div>
                 </form>
         </div>

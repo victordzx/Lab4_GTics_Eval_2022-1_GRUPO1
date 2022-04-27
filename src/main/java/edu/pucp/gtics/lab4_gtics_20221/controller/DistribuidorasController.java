@@ -51,12 +51,14 @@ public class DistribuidorasController {
         }
     }
 
+    @GetMapping("/nuevo")
     public String nuevaDistribuidora(@ModelAttribute("distribuidoras") Distribuidoras distribuidoras, Model model ){
         model.addAttribute("listaDistribuidoras", distribuidorasRepository.findAll());
         model.addAttribute("listaPaises", paisesRepository.findAll());
         return "distribuidoras/editarFrm";
     }
 
+    @PostMapping("/guardar")
     public String guardarDistribuidora(@ModelAttribute("distribuidoras") @Valid Distribuidoras distribuidoras, BindingResult bindingResult,
                                        RedirectAttributes attr, Model model ){
         if (bindingResult.hasErrors()) {
