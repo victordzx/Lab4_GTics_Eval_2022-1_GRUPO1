@@ -71,14 +71,31 @@ public class JuegosController {
     }
 
     @PostMapping("/guardar")
-    public String guardarJuegos(@ModelAttribute("juegos") @Valid Juegos juego, BindingResult bindingResult,
+    public String guardarJuegos(@ModelAttribute("juegos") @Valid Juegos juegos, BindingResult bindingResult,
                                 RedirectAttributes attr, Model model){
-        if (juego.getIdjuego() == null) {
+        if (juegos.getIdjuego() == 0) {
+            juegosRepository.save(juegos);
             attr.addFlashAttribute("msg", "Juego creado exitosamente");
-            juego.set
         } else {
-            attr.addFlashAttribute("msg", "Juego actualizado exitosamente");
+            try {
+                Optional<Juegos> juegosOptional = juegosRepository.findById(juegos.getIdjuego());
+                if (juegosOptional.isPresent()) {
+                    Juegos juegosGuardar = juegosOptional.get();
+                    juegosGuardar.setNombre(juegos.getNombre());
+                    juegosGuardar.setDescripcion(juegos.getDescripcion());
+                    juegosGuardar.setGenero(juegos.getGenero());
+                    juegosGuardar.setPlataforma(juegos.getPlataforma());
+                    juegosGuardar.setDistribuidora(juegos.getDistribuidora());
+                    juegosGuardar.setImage(juegos.setImage());
+                    juegosGuardar.setPrecio(juegos.setPrecio(););
+                    juegosRepository.save(juegosGuardar);
+                    attr.addFlashAttribute("msg", "Juego actualizado exitosamente");
+                }
+            } catch (Exception e) {
+                System.out.println("ID Juego inválido");
+            }
         }
+        return "redirect:/juego/lista";
     }
 
     @GetMapping("/borrar")
