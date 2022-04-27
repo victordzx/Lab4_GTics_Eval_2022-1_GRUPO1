@@ -32,7 +32,7 @@ public class Distribuidoras {
 
     @ManyToOne
     @JoinColumn(name = "idsede")
-    @NotNull(message = "Paises no puede estar vacio")
+    @NotNull(message = "Sede no puede estar vacío")
     private Paises pais;
 
     public int getIddistribuidora() {
