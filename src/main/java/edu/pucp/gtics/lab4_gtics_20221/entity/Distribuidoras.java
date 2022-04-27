@@ -25,7 +25,6 @@ public class Distribuidoras {
 
     @ManyToOne
     @JoinColumn(name = "idsede")
-
     private Paises pais;
 
     public int getIddistribuidora() {

@@ -14,7 +14,7 @@
                 <form method="POST" th:action="@{'/distribuidoras/guardar'}" th:object="${distribuidoras}" class="row g-3">
                     <input th:field="*{iddistribuidora}" type="hidden"/>
 
-
+                    <!--- Nombre --->
                     <div class="form-group">
                         <label>Nombre</label>
                         <input th:field="*{nombre}" class="form-control" type="text"
@@ -22,6 +22,8 @@
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}"
                              th:errors="*{nombre}"></div>
                     </div>
+
+                    <!--- Descripción --->
                     <div class="form-group">
                         <label>Descripción</label>
                         <input th:field="*{descripcion}" class="form-control" type="text"
@@ -30,6 +32,7 @@
                              th:errors="*{descripcion}"></div>
                     </div>
 
+                    <!--- URL Web --->
                     <div class="form-group">
                         <label>URL Web</label>
                         <input th:field="*{web}" class="form-control" type="text"
@@ -38,6 +41,7 @@
                              th:errors="*{web}"></div>
                     </div>
 
+                    <!--- Fundación --->
                     <div class="form-group">
                         <label>Fundación</label>
                         <input th:field="*{fundacion}" class="form-control" type="text"
@@ -46,6 +50,7 @@
                              th:errors="*{fundacion}"></div>
                     </div>
 
+                    <!--- Sede --->
                     <div class="form-group" th:if="${distribuidoras.iddistribuidora == 0}">
                         <label>Sede</label>
                         <select class="form-select" name="pais" th:field="*{pais}">
@@ -54,8 +59,13 @@
                         </select>
                         <div class="text-danger" th:if="${#fields.hasErrors('pais')}"
                              th:errors="*{pais}"></div>
-
-                    </div>
+                    </div> <!--- Nueva distribuidora --->
+                    <div class="form-group" th:if="${distribuidoras.iddistribuidora != 0}">
+                        <label>Sede</label>
+                        <select class="form-select" name="pais" th:field="*{pais}">
+                            <option th:each="sede : ${listaPaises}" th:value="${sede.idpais}" th:text="${sede.nombre}" th:selected="${distribuidoras.pais == sede}"></option>
+                        </select>
+                    </div> <!--- Editar distrbuidora --->
 
 
                     <div class="form-group">

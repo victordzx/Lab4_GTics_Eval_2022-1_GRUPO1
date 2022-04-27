@@ -43,7 +43,6 @@ public class DistribuidorasController {
         if(distribuidorasOptional.isPresent()){
             distribuidoras = distribuidorasOptional.get();
             model.addAttribute("distribuidoras", distribuidoras);
-            model.addAttribute("listaDistribuidoras", distribuidorasRepository.findAll());
             model.addAttribute("listaPaises", paisesRepository.findAll());
             return "distribuidoras/editarFrm";
         }else{
@@ -79,10 +78,10 @@ public class DistribuidorasController {
     }
 
     @GetMapping("/borrar")
-    public String borrarDistribuidora(@RequestParam("id") int id, RedirectAttributes attr){
-        Optional<Distribuidoras> opt = distribuidorasRepository.findById(id);
+    public String borrarDistribuidora(@RequestParam("iddistribuidora") int iddistribuidora, RedirectAttributes attr){
+        Optional<Distribuidoras> opt = distribuidorasRepository.findById(iddistribuidora);
         if (opt.isPresent()) {
-            distribuidorasRepository.deleteById(id);
+            distribuidorasRepository.deleteById(iddistribuidora);
         }
         attr.addFlashAttribute("msg", "Distribuidora borrada exitosamente");
         return "redirect:/distribuidoras/lista";
