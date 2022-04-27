@@ -7,10 +7,10 @@
     <div id="content">
         <main>
             <!-- Contenido -->
-        <div class="page-header text-center">
-            <h2 th:text="${juegos.idjuego == 0? 'Nuevo Juego' : 'Editar Juego'}"></h2>
-        </div>
-        <div class="container-fluid">
+            <div class="page-header text-center">
+                <h2 th:text="${juegos.idjuego == 0? 'Nuevo Juego' : 'Editar Juego'}"></h2>
+            </div>
+            <div class="container-fluid">
                 <form method="POST" class="row g-3" >
                     <div class="form-group">
                         <label>Nombre</label>
@@ -70,10 +70,10 @@
                         <button type="submit" class="btn btn-primary" th:text="Boton ---">Reg/act</button>
                     </div>
                 </form>
-        </div>
+            </div>
         </main>
     </div>
-            <!-- /Contenido -->
+    <!-- /Contenido -->
     <div th:replace="fragments/footer.html :: footer(year='2022')"></div>
 </div>
 <div th:replace="fragments/base.html :: jsScripts"></div>
