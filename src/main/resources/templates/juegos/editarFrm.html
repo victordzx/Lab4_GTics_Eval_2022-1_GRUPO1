@@ -8,38 +8,58 @@
         <main>
             <!-- Contenido -->
         <div class="page-header text-center">
+            <h2 th:text="${juegos.idjuego == 0? 'Nuevo Juego' : 'Editar Juego'}"></h2>
         </div>
         <div class="container-fluid">
                 <form method="POST" class="row g-3" >
                     <div class="form-group">
                         <label>Nombre</label>
+                        <input th:field="*{nombre}" type="text" class="form-control">
+                        <div class="text-danger" th:if="${#fields.hasErrors('nombre')}"
+                             th:errors="*{nombre}"></div>
 
                     </div>
                     <div class="form-group">
                         <label>Descripción</label>
+                        <input th:field="*{descripcion}" type="text" class="form-control">
+                        <div class="text-danger" th:if="${#fields.hasErrors('descripcion')}"
+                             th:errors="*{descripcion}"></div>
 
                     </div>
                     <div class="form-group">
-                        <label for="">Género</label>
+                        <label for="genero">Género</label>
+                        <input th:field="*{genero.nombre}" type="text" class="form-control" name="nombre" id="genero">
+                        <div class="text-danger" th:if="${#fields.hasErrors('genero.nombre')}"
+                             th:errors="*{genero.nombre}"></div>
 
                     </div>
                     <div class="form-group">
-                        <label for="">Plataforma</label>
-
+                        <label for="plataforma">Plataforma</label>
+                        <input th:field="*{plataforma.nombre}" type="text" class="form-control" name="nombre" id="plataforma">
+                        <div class="text-danger" th:if="${#fields.hasErrors('genero.nombre')}"
+                             th:errors="*{plataforma.nombre}"></div>
                     </div>
                     <div class="form-group">
-                        <label for="">Distribuidora</label>
-
+                        <label for="distribuidora">Distribuidora</label>
+                        <input th:field="*{distribuidora.nombre}" type="text" class="form-control" name="nombre" id="distribuidora">
+                        <div class="text-danger" th:if="${#fields.hasErrors('genero.nombre')}"
+                             th:errors="*{distribuidora.nombre}"></div>
                     </div>
                     <div class="form-group">
                         <label>Imagen URL</label>
+                        <input th:field="*{image}" type="url" class="form-control">
+                        <div class="text-danger" th:if="${#fields.hasErrors('image')}"
+                             th:errors="*{image}"></div>
 
                     </div>
                     <div class="form-group">
                         <label>Precio</label>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
-                                <div class="input-group-text">S/</div>
+                                <div class="input-group-text">S/
+                                    <input th:field="*{precio}" type="text" class="form-control">
+                                    <div class="text-danger" th:if="${#fields.hasErrors('precio')}"
+                                         th:errors="*{precio}"></div></div>
                             </div>
 
                         </div>
@@ -47,8 +67,7 @@
 
                     <div class="form-group">
                         <a th:href="@{/juegos/lista}" class="btn btn-danger">Cancelar</a>
-                        <!--- <button th:text="" type="submit" class="btn btn-primary"></button> --->
-                        <button th:text="regact" type="submit" class="btn btn-primary"></button>
+                        <button type="submit" class="btn btn-primary" th:text="Boton ---">Reg/act</button>
                     </div>
                 </form>
         </div>
