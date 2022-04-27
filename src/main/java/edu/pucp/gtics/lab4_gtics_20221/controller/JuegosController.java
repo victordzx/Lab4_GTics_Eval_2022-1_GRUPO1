@@ -33,7 +33,7 @@ public class JuegosController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping(value = {"", "/","/juegos/lista"})
+    @GetMapping("/lista")
     public String listaJuegos (Model model){
         model.addAttribute("listaJuegos", juegosRepository.findAll());
         model.addAttribute("listaPlataforma", plataformasRepository.findAll());
