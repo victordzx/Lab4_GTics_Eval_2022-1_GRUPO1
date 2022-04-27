@@ -42,7 +42,7 @@ public class DistribuidorasController {
         Optional<Distribuidoras> distribuidorasOptional = distribuidorasRepository.findById(iddistribuidora);
         if(distribuidorasOptional.isPresent()){
             distribuidoras = distribuidorasOptional.get();
-            model.addAttribute("distribuidora", distribuidoras);
+            model.addAttribute("distribuidoras", distribuidoras);
             model.addAttribute("listaDistribuidoras", distribuidorasRepository.findAll());
             model.addAttribute("listaPaises", paisesRepository.findAll());
             return "distribuidoras/editarFrm";

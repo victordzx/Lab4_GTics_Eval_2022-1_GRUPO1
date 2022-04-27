@@ -7,31 +7,56 @@
     <div id="content">
         <main>
             <!-- Contenido -->
-        <div class="page-header text-center">
-            <h2 th:text=""></h2>
-        </div>
-        <div class="container-fluid">
-                <form method="POST"  class="row g-3" >
-                    <div class="form-group">
-                        <label for="">Nombre</label>
+            <div class="page-header text-center">
+                <h2 th:text="${distribuidoras.iddistribuidora == 0? 'Nueva Distribuidora' : 'Editar Distribuidora'}"></h2>
+            </div>
+            <div class="container-fluid">
+                <form method="POST" th:action="@{'/distribuidoras/guardar'}" th:object="${distribuidoras}" class="row g-3">
+                    <input th:field="*{iddistribuidora}" type="hidden"/>
 
+
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input th:field="*{nombre}" class="form-control" type="text"
+                               th:classappend="${#fields.hasErrors('nombre')?'is-invalid':''}"/>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}"
+                             th:errors="*{nombre}"></div>
                     </div>
                     <div class="form-group">
-                        <label for="">Descripción</label>
-
+                        <label>Descripción</label>
+                        <input th:field="*{descripcion}" class="form-control" type="text"
+                               th:classappend="${#fields.hasErrors('descripcion')?'is-invalid':''}"/>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}"
+                             th:errors="*{descripcion}"></div>
                     </div>
+
                     <div class="form-group">
-                        <label for="">URL Web</label>
-
+                        <label>URL Web</label>
+                        <input th:field="*{web}" class="form-control" type="text"
+                               th:classappend="${#fields.hasErrors('web')?'is-invalid':''}"/>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('web')}"
+                             th:errors="*{web}"></div>
                     </div>
+
                     <div class="form-group">
-                        <label for="">Fundación</label>
+                        <label>Fundación</label>
+                        <input th:field="*{fundacion}" class="form-control" type="text"
+                               th:classappend="${#fields.hasErrors('fundacion')?'is-invalid':''}"/>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('fundacion')}"
+                             th:errors="*{fundacion}"></div>
+                    </div>
+
+                    <div class="form-group" th:if="${distribuidoras.iddistribuidora == 0}">
+                        <label>Sede</label>
+                        <select class="form-select" name="pais" th:field="*{pais}">
+                            <option value="0">-- Seleccione --</option>
+                            <option th:each="dstrb : ${listaPaises}" th:value="${dstrb.idpais}" th:text="${dstrb.nombre}"></option>
+                        </select>
+                        <div class="text-danger" th:if="${#fields.hasErrors('pais')}"
+                             th:errors="*{pais}"></div>
 
                     </div>
-                    <div class="form-group">
-                        <label for="">Sede</label>
 
-                    </div>
 
                     <div class="form-group">
                         <a th:href="@{/distribuidoras/lista}" class="btn btn-danger">Cancelar</a>
