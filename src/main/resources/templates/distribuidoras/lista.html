@@ -18,7 +18,9 @@
                         <h1>Lista de Distribuidoras</h1>
                     </div>
                     <div class="container-fluid">
-
+                        <div class="alert alert-success" th:text="${msg1}" th:if="${msg1 != null}"></div>
+                        <div class="alert alert-success" th:text="${msg2}" th:if="${msg2 != null}"></div>
+                        <div class="alert alert-danger" th:text="${msg3}" th:if="${msg3 != null}"></div>
                         <a class="btn btn-primary mt-4 mb-4" th:href="@{/distribuidoras/nuevo}"><span
                                 class="bi bi-plus-circle"></span> Nueva Distribuidora</a>
                         <table class="table table-striped">

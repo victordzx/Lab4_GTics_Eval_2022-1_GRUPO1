@@ -66,12 +66,12 @@ public class DistribuidorasController {
             return "distribuidoras/editarFrm";
         } else {
             if (distribuidoras.getIddistribuidora() == 0) {
-                attr.addFlashAttribute("msg1", "Distribuidora creado exitosamente");
+                attr.addFlashAttribute("msg1", "Distribuidora creada exitosamente");
                 distribuidorasRepository.save(distribuidoras);
                 return "redirect:/distribuidoras/lista";
             } else {
                 distribuidorasRepository.save(distribuidoras);
-                attr.addFlashAttribute("msg2", "Distribuidora actualizado exitosamente");
+                attr.addFlashAttribute("msg2", "Distribuidora actualizada exitosamente");
                 return "redirect:/distribuidoras/lista";
             }
         }
@@ -83,7 +83,7 @@ public class DistribuidorasController {
         if (opt.isPresent()) {
             distribuidorasRepository.deleteById(iddistribuidora);
         }
-        attr.addFlashAttribute("msg", "Distribuidora borrada exitosamente");
+        attr.addFlashAttribute("msg3", "Distribuidora borrada exitosamente");
         return "redirect:/distribuidoras/lista";
     }
 
