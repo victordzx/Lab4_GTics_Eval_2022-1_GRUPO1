@@ -35,7 +35,9 @@
                         <td>
                             <img th:src="${juegos.image}" width=100/>
                         </td>
-                        <td th:text="${juegos.nombre}"></td>
+                        <td>
+                        <span th:text="${juegos.nombre}"></span>
+                        <b><div class="d-lg-inline-block bg-warning" style="border-radius: 10%;font-size: 15px" th:text="${juegos.genero.nombre}"></div></b></td>
                         <td th:text="${juegos.descripcion}"></td>
                         <td th:text="${juegos.plataforma.nombre}"></td>
                         <td th:text="${juegos.distribuidora.nombre}"></td>
