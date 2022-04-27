@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 
-
+@Controller
+@RequestMapping("/juegos")
 public class JuegosController {
 
     @Autowired
@@ -34,24 +35,27 @@ public class JuegosController {
     UserRepository userRepository;
 
     @GetMapping(value = {"", "/","/juegos/lista"})
-    public String listaJuegos (){
-
+    public String listaJuegos (Model model){
+        model.addAttribute("listaJuegos", juegosRepository.findAll());
+        model.addAttribute("listaPlataforma", plataformasRepository.findAll());
+        model.addAttribute("listaDistribuidora", distribuidorasRepository.findAll());
+        return "juegos/lista";
     }
 
     public String vistaJuegos ( ){
-
+        return "juegos/vista";
     }
 
     public String nuevoJuegos( ){
-
+        return "juegos/editarFrm";
     }
 
     public String editarJuegos( ){
-
+        return "juegos/editarFrm";
     }
 
     public String guardarJuegos( ){
-
+        return "redirect:/juegos";
     }
 
     @GetMapping("/juegos/borrar")
