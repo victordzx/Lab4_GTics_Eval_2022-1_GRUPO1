@@ -49,8 +49,8 @@
                         <td th:text="${juegos.plataforma.nombre}"></td>
                         <td th:text="${juegos.distribuidora.nombre}"></td>
                         <td th:text="${juegos.precio}"></td>
-                        <td><a class="btn btn-primary" th:title="Editar" th:href="@{'/juegos/editar?id=' + ${juegos.idjuego}}"><span class="bi bi-pencil-square"></span></a></td>
-                        <td><a class="btn btn-danger" th:title="Borrar" th:href="@{'/juegos/borrar?id=' + ${juegos.idjuego}}"><span class="bi bi-trash"></span></a></td>
+                        <td><a class="btn btn-primary" th:title="Editar" th:href="@{'/juegos/editar?idjuego=' + ${juegos.idjuego}}"><span class="bi bi-pencil-square"></span></a></td>
+                        <td><a class="btn btn-danger" th:title="Borrar" th:href="@{'/juegos/borrar?idjuego=' + ${juegos.idjuego}}"><span class="bi bi-trash"></span></a></td>
                     </tr>
                     </tbody>
                 </table>
